@@ -429,11 +429,11 @@ echo '
 
 <!-- Select input-->
 <div class="form-group">
-    <label class="col-md-12" for="type">Question Format Type</label>
+    <label class="col-md-12" for="format">Question Format Type</label>
     <div class="col-md-6">
     <select id="format" name="format" class="form-control">
       <option value="type1" selected>AIKEN</option>
-      <option value="type2">GIFT</option>
+      <option value="type2" >GIFT</option>
     </select>
     </div>
 </div>

@@ -111,7 +111,7 @@ $c=0;
 echo '</table></div>';
 
 }?>
-<!--<span id="countdown" class="timer"></span>
+<span id="countdown" class="timer"></span>
 <script>
 var seconds = 40;
     function secondPassed() {
@@ -129,7 +129,7 @@ var seconds = 40;
     }
     }
 var countdownTimer = setInterval('secondPassed()', 1000);
-</script>-->
+</script>
 
 <!--home closed-->
 
@@ -160,6 +160,9 @@ echo'<input type="radio" name="ans" value="'.$optionid.'">'.$option.'<br /><br /
 echo'<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
 //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
 }
+
+
+
 //result display
 if(@$_GET['q']== 'result' && @$_GET['eid']) 
 {
@@ -175,10 +178,12 @@ $w=$row['wrong'];
 $r=$row['sahi'];
 $qa=$row['level'];
 echo '<tr style="color:#66CCFF"><td>Total Questions</td><td>'.$qa.'</td></tr>
-      <tr style="color:#99cc32"><td>right Answer&nbsp;<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></td><td>'.$r.'</td></tr> 
+      <tr style="color:#99cc32"><td>Right Answer&nbsp;<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></td><td>'.$r.'</td></tr> 
 	  <tr style="color:red"><td>Wrong Answer&nbsp;<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></td><td>'.$w.'</td></tr>
-	  <tr style="color:#66CCFF"><td>Score&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span></td><td>'.$s.'</td></tr>';
+    <tr style="color:#66CCFF"><td>Score&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span></td><td>'.$s.'</td></tr>';
+    
 }
+
 $q=mysqli_query($con,"SELECT * FROM rank WHERE  email='$email' " )or die('Error157');
 while($row=mysqli_fetch_array($q) )
 {
@@ -187,7 +192,91 @@ echo '<tr style="color:#990000"><td>Overall Score&nbsp;<span class="glyphicon gl
 }
 echo '</table></div>';
 
+// Reference
+
+$qr = mysqli_query($con,"SELECT * FROM questions WHERE eid='$eid' " )or die('Error157');
+echo  '<div class="panel">
+<center><h1 class="title" style="color:#660033">Reference</h1><center><br /><table class="table table-striped title1" style="font-size:20px;font-weight:1000;">';
+
+
+while($row=mysqli_fetch_array($qr) )
+{
+$stt = $row['sn'];
+$ref = $row['reference'];
+if (is_null($ref)){
+  $ref_string = "There's no reference for this question.";
+
 }
+else{
+  $ref_string = $ref;
+}
+echo '<tr style=""><td>Question '.$stt.'</td><td>'.$ref_string.'</td></tr>
+      ';
+    
+}
+
+
+
+echo '</table></div>';
+
+
+// Discussion
+$qd = mysqli_query($con,"SELECT * FROM forum WHERE id_quiz='$eid' " )or die('Error157');
+echo  '<div class="panel">
+<center><h1 class="title" style="color:#660033">Discussion</h1><center><br /><table class="table table-striped title1" style="font-size:20px;font-weight:1000;">';
+
+while($row=mysqli_fetch_array($qd) ){
+$cmt = $row['content'];
+$email = $row['email_user'];
+$user = mysqli_query($con,"SELECT * FROM user WHERE email='$email' " )or die('Error157');
+while($row2=mysqli_fetch_array($user) ){
+$user_name = $row2['name'];
+
+  echo '<tr style=""><td><b>'.$user_name.'</b></td><td>'.$cmt.'</td></tr>
+      ';
+}
+
+}
+
+echo '</table></div>';
+
+// comment
+echo '
+<form class="form-horizontal title1" name="form" action="update.php?q=comment" method="POST">
+<fieldset>
+<div class="form-group">
+  <label class="col-md-12 control-label" for="comment"></label>  
+  <div class="col-md-12">
+  <textarea id="comment" name="comment" placeholder="Comment here" class="form-control" min="1" type="text"></textarea>
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-12 control-label" for="id_quiz"></label>  
+  <div class="col-md-12">
+  <input id="id_quiz" name="id_quiz" class="form-control input-md" min="1" type="hidden" value="'.$eid.'">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-12 control-label" for=""></label>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-primary" class="btn btn-primary" style="margin-left:45%">Comment</button>
+  </div>
+</div> 
+</fieldset>
+</form>';
+
+
+
+}
+
+
+
+
+
 ?>
 <!--quiz end-->
 <?php

@@ -1,38 +1,40 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 24, 2015 at 06:33 AM
--- Server version: 5.6.19
--- PHP Version: 5.5.12
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th5 02, 2018 lúc 05:40 PM
+-- Phiên bản máy phục vụ: 10.1.31-MariaDB
+-- Phiên bản PHP: 7.1.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project`
+-- Cơ sở dữ liệu: `project`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Cấu trúc bảng cho bảng `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
+CREATE TABLE `admin` (
   `email` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `admin`
+-- Đang đổ dữ liệu cho bảng `admin`
 --
 
 INSERT INTO `admin` (`email`, `password`) VALUES
@@ -41,16 +43,16 @@ INSERT INTO `admin` (`email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answer`
+-- Cấu trúc bảng cho bảng `answer`
 --
 
-CREATE TABLE IF NOT EXISTS `answer` (
+CREATE TABLE `answer` (
   `qid` text NOT NULL,
   `ansid` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `answer`
+-- Đang đổ dữ liệu cho bảng `answer`
 --
 
 INSERT INTO `answer` (`qid`, `ansid`) VALUES
@@ -75,10 +77,10 @@ INSERT INTO `answer` (`qid`, `ansid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `feedback`
+-- Cấu trúc bảng cho bảng `feedback`
 --
 
-CREATE TABLE IF NOT EXISTS `feedback` (
+CREATE TABLE `feedback` (
   `id` text NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -89,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `feedback`
+-- Đang đổ dữ liệu cho bảng `feedback`
 --
 
 INSERT INTO `feedback` (`id`, `name`, `email`, `subject`, `feedback`, `date`, `time`) VALUES
@@ -103,10 +105,34 @@ INSERT INTO `feedback` (`id`, `name`, `email`, `subject`, `feedback`, `date`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `history`
+-- Cấu trúc bảng cho bảng `forum`
 --
 
-CREATE TABLE IF NOT EXISTS `history` (
+CREATE TABLE `forum` (
+  `id_quiz` text COLLATE utf8_unicode_ci NOT NULL,
+  `email_user` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `forum`
+--
+
+INSERT INTO `forum` (`id_quiz`, `email_user`, `content`, `id`) VALUES
+('5589222f16b93', 'avantika420@gmail.com', 'I got bad mark :((', 1),
+('5589222f16b93', 'ceo@facebook.com', 'okay fine :)', 2),
+('5589222f16b93', 'sunnygkp10@gmail.com', 'good quiz!', 3),
+('5589222f16b93', 'sunnygkp10@gmail.com', 'haha', 4),
+('5589222f16b93', 'sunnygkp10@gmail.com', 'hhhh', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `history`
+--
+
+CREATE TABLE `history` (
   `email` varchar(50) NOT NULL,
   `eid` text NOT NULL,
   `score` int(11) NOT NULL,
@@ -117,33 +143,34 @@ CREATE TABLE IF NOT EXISTS `history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `history`
+-- Đang đổ dữ liệu cho bảng `history`
 --
 
 INSERT INTO `history` (`email`, `eid`, `score`, `level`, `sahi`, `wrong`, `date`) VALUES
 ('sunnygkp10@gmail.com', '558921841f1ec', 4, 2, 2, 0, '2015-06-23 09:31:26'),
 ('sunnygkp10@gmail.com', '558920ff906b8', 4, 2, 2, 0, '2015-06-23 13:32:09'),
 ('avantika420@gmail.com', '558921841f1ec', 4, 2, 2, 0, '2015-06-23 14:33:04'),
-('avantika420@gmail.com', '5589222f16b93', 4, 2, 2, 0, '2015-06-23 14:49:39'),
 ('sunnygkp10@gmail.com', '5589741f9ed52', 4, 5, 3, 2, '2015-06-23 15:07:16'),
 ('mi5@hollywood.com', '5589222f16b93', 4, 2, 2, 0, '2015-06-23 15:12:56'),
 ('nik1@gmail.com', '558921841f1ec', 1, 2, 1, 1, '2015-06-23 16:11:50'),
-('sunnygkp10@gmail.com', '5589222f16b93', 1, 2, 1, 1, '2015-06-24 03:22:38');
+('avantika420@gmail.com', '5589222f16b93', 4, 2, 2, 0, '2018-03-22 18:52:53'),
+('sunnygkp10@gmail.com', '558922ec03021', -2, 2, 0, 2, '2018-04-29 16:55:39'),
+('sunnygkp10@gmail.com', '5589222f16b93', 0, 2, 1, 2, '2018-05-01 21:08:26');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `options`
+-- Cấu trúc bảng cho bảng `options`
 --
 
-CREATE TABLE IF NOT EXISTS `options` (
+CREATE TABLE `options` (
   `qid` varchar(50) NOT NULL,
   `option` varchar(5000) NOT NULL,
   `optionid` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `options`
+-- Đang đổ dữ liệu cho bảng `options`
 --
 
 INSERT INTO `options` (`qid`, `option`, `optionid`) VALUES
@@ -220,48 +247,49 @@ INSERT INTO `options` (`qid`, `option`, `optionid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Cấu trúc bảng cho bảng `questions`
 --
 
-CREATE TABLE IF NOT EXISTS `questions` (
+CREATE TABLE `questions` (
   `eid` text NOT NULL,
   `qid` text NOT NULL,
   `qns` text NOT NULL,
   `choice` int(10) NOT NULL,
-  `sn` int(11) NOT NULL
+  `sn` int(11) NOT NULL,
+  `reference` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `questions`
+-- Đang đổ dữ liệu cho bảng `questions`
 --
 
-INSERT INTO `questions` (`eid`, `qid`, `qns`, `choice`, `sn`) VALUES
-('558920ff906b8', '55892169bf6a7', 'what is command for changing user information??', 4, 1),
-('558920ff906b8', '5589216a3646e', 'what is permission for view only for other??', 4, 2),
-('558921841f1ec', '558922117fcef', 'what is command for print in php??', 4, 1),
-('558921841f1ec', '55892211e44d5', 'which is a variable of php??', 4, 2),
-('5589222f16b93', '558922894c453', 'what is correct statement in c++??', 4, 1),
-('5589222f16b93', '558922899ccaa', 'which command is use for print the output in c++?', 4, 2),
-('558922ec03021', '558923538f48d', 'what is correct mask for A class IP???', 4, 1),
-('558922ec03021', '55892353f05c4', 'which is not a private IP??', 4, 2),
-('55897338a6659', '558973f4389ac', 'On Linux, initrd is a file', 4, 1),
-('55897338a6659', '558973f4c46f2', 'Which is loaded into memory when system is booted?', 4, 2),
-('55897338a6659', '558973f51600d', ' The process of starting up a computer is known as', 4, 3),
-('55897338a6659', '558973f55d269', ' Bootstrapping is also known as', 4, 4),
-('55897338a6659', '558973f5abb1a', 'The shell used for Single user mode shell is:', 4, 5),
-('5589741f9ed52', '5589751a63091', ' Which command is used to close the vi editor?', 4, 1),
-('5589741f9ed52', '5589751ad32b8', ' In vi editor, the key combination CTRL+f', 4, 2),
-('5589741f9ed52', '5589751b304ef', ' Which vi editor command copies the current line of the file?', 4, 3),
-('5589741f9ed52', '5589751b749c9', ' Which command is used to delete the character before the cursor location in vi editor?', 4, 4),
-('5589741f9ed52', '5589751bd02ec', ' Which one of the following statement is true?', 4, 5);
+INSERT INTO `questions` (`eid`, `qid`, `qns`, `choice`, `sn`, `reference`) VALUES
+('558920ff906b8', '55892169bf6a7', 'what is command for changing user information??', 4, 1, 'https://support.microsoft.com/en-us/help/186504/terminal-server-commands-change'),
+('558920ff906b8', '5589216a3646e', 'what is permission for view only for other??', 4, 2, 'https://unix.stackexchange.com/questions/138246/give-read-only-access-to-specific-folders'),
+('558921841f1ec', '558922117fcef', 'what is command for print in php??', 4, 1, 'http://php.net/manual/en/function.print.php'),
+('558921841f1ec', '55892211e44d5', 'which is a variable of php??', 4, 2, 'https://www.w3schools.com/php/php_variables.asp'),
+('5589222f16b93', '558922894c453', 'what is correct statement in c++??', 4, 1, 'http://en.cppreference.com/w/cpp/language/statements'),
+('5589222f16b93', '558922899ccaa', 'which command is use for print the output in c++?', 4, 2, 'https://www.quora.com/How-can-I-print-output-from-turbo-c++'),
+('558922ec03021', '558923538f48d', 'what is correct mask for A class IP???', 4, 1, 'http://www.cse.uconn.edu/~vcb5043/MISC/IP%20Intranet.html'),
+('558922ec03021', '55892353f05c4', 'which is not a private IP??', 4, 2, 'https://whatismyipaddress.com/private-ip'),
+('55897338a6659', '558973f4389ac', 'On Linux, initrd is a file', 4, 1, 'https://www.sanfoundry.com/linux-administration-questions-startup-shutdown/'),
+('55897338a6659', '558973f4c46f2', 'Which is loaded into memory when system is booted?', 4, 2, 'https://en.wikipedia.org/wiki/Booting'),
+('55897338a6659', '558973f51600d', ' The process of starting up a computer is known as', 4, 3, 'https://www.tldp.org/HOWTO/Unix-and-Internet-Fundamentals-HOWTO/bootup.html'),
+('55897338a6659', '558973f55d269', ' Bootstrapping is also known as', 4, 4, 'https://competitive-exam.in/Questions/discuss/bootstrapping-is-also-known-as'),
+('55897338a6659', '558973f5abb1a', 'The shell used for Single user mode shell is:', 4, 5,'https://www.globalguideline.com/interview_questions/Answer.php?a=The_shell_used_for_Single_user_mode_shell_isa_bashb_Cshc_kshd_sh'),
+('5589741f9ed52', '5589751a63091', ' Which command is used to close the vi editor?', 4, 1, 'https://www.washington.edu/computing/unix/vi.html'),
+('5589741f9ed52', '5589751ad32b8', ' In vi editor, the key combination CTRL+f', 4, 2, 'http://www.lagmonster.org/docs/vi2.html'),
+('5589741f9ed52', '5589751b304ef', ' Which vi editor command copies the current line of the file?', 4, 3, 'https://www.ccsf.edu/Pub/Fac/vi.html'),
+('5589741f9ed52', '5589751b749c9', ' Which command is used to delete the character before the cursor location in vi editor?', 4, 4, 'https://alvinalexander.com/linux/vi-vim-delete-line-commands-to-end'),
+('5589741f9ed52', '5589751bd02ec', ' Which one of the following statement is true?', 4, 5, 'https://www.chegg.com/homework-help/questions-and-answers/one-following-statements-true-explain-given-vallues-diffusion-q4927304');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `quiz`
+-- Cấu trúc bảng cho bảng `quiz`
 --
 
-CREATE TABLE IF NOT EXISTS `quiz` (
+CREATE TABLE `quiz` (
   `eid` text NOT NULL,
   `title` varchar(100) NOT NULL,
   `sahi` int(11) NOT NULL,
@@ -274,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `quiz` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `quiz`
+-- Đang đổ dữ liệu cho bảng `quiz`
 --
 
 INSERT INTO `quiz` (`eid`, `title`, `sahi`, `wrong`, `total`, `time`, `intro`, `tag`, `date`) VALUES
@@ -288,43 +316,42 @@ INSERT INTO `quiz` (`eid`, `title`, `sahi`, `wrong`, `total`, `time`, `intro`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rank`
+-- Cấu trúc bảng cho bảng `rank`
 --
 
-CREATE TABLE IF NOT EXISTS `rank` (
+CREATE TABLE `rank` (
   `email` varchar(50) NOT NULL,
   `score` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `rank`
+-- Đang đổ dữ liệu cho bảng `rank`
 --
 
 INSERT INTO `rank` (`email`, `score`, `time`) VALUES
-('sunnygkp10@gmail.com', 9, '2015-06-24 03:22:38'),
-('avantika420@gmail.com', 8, '2015-06-23 14:49:39'),
+('sunnygkp10@gmail.com', 4, '2018-05-01 20:36:06'),
+('avantika420@gmail.com', 8, '2018-03-22 18:52:53'),
 ('mi5@hollywood.com', 4, '2015-06-23 15:12:56'),
 ('nik1@gmail.com', 1, '2015-06-23 16:11:50');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Cấu trúc bảng cho bảng `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `name` varchar(50) NOT NULL,
   `gender` varchar(5) NOT NULL,
   `college` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `mob` bigint(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  PRIMARY KEY (`email`)
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Đang đổ dữ liệu cho bảng `user`
 --
 
 INSERT INTO `user` (`name`, `gender`, `college`, `email`, `mob`, `password`) VALUES
@@ -336,6 +363,33 @@ INSERT INTO `user` (`name`, `gender`, `college`, `email`, `mob`, `password`) VAL
 ('Nikunj', 'M', 'XYZ', 'nik1@gmail.com', 987, '202cb962ac59075b964b07152d234b70'),
 ('Sunny', 'M', 'KNIT sultanpur', 'sunnygkp10@gmail.com', 7785068889, 'e10adc3949ba59abbe56e057f20f883e'),
 ('Vikash', 'M', 'KNIT sultanpur@gmail.com', 'vikash@gmail.com', 7785068889, 'e10adc3949ba59abbe56e057f20f883e');
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `forum`
+--
+ALTER TABLE `forum`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `forum`
+--
+ALTER TABLE `forum`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
